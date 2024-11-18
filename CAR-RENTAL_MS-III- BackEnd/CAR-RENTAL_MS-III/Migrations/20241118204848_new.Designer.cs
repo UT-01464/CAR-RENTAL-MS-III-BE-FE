@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CAR_RENTAL_MS_III.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241118035614_new")]
+    [Migration("20241118204848_new")]
     partial class @new
     {
         /// <inheritdoc />
@@ -44,6 +44,10 @@ namespace CAR_RENTAL_MS_III.Migrations
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -226,8 +230,17 @@ namespace CAR_RENTAL_MS_III.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<double>("DailyRate")
+                        .HasColumnType("float");
+
                     b.Property<int>("ManagerId")
                         .HasColumnType("int");
+
+                    b.Property<double?>("OverdueAmount")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("OverdueRatePerDay")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("RentalDate")
                         .HasColumnType("datetime2");

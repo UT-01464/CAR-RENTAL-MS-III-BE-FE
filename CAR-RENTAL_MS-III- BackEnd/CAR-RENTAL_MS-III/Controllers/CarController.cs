@@ -17,43 +17,77 @@ namespace CAR_RENTAL_MS_III.Controllers
             _carService = carService;
         }
 
-
-        [HttpGet("GetAllCars")]
-        public async Task<ActionResult<IEnumerable<CarResponseDTO>>> GetAllCars()
+        // GET: api/Car
+        [HttpGet]
+        public async Task<IActionResult> GetAllCars()
         {
             var cars = await _carService.GetAllCarsAsync();
             return Ok(cars);
         }
 
-        [HttpGet("GetCarById/{id}")]
-        public async Task<ActionResult<CarResponseDTO>> GetCarById(int id)
+        // GET: api/Car/5
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetCarById(int id)
         {
-            var car = await _carService.GetCarByIdAsync(id);
-            if (car == null) return NotFound();
-            return Ok(car);
+            try
+            {
+                var car = await _carService.GetCarByIdAsync(id);
+                return Ok(car);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound($"Car with ID {id} not found.");
+            }
         }
 
-        [HttpPost("AddCar")]
-        public async Task<ActionResult> AddCar(CarRequestDTO carDto)
+        // POST: api/Car
+        [HttpPost]
+        public async Task<IActionResult> AddCar([FromForm] CarRequestDTO carRequest)
         {
-            var carId = await _carService.AddCarAsync(carDto);
-            var createdCar = await _carService.GetCarByIdAsync(carId);
-            return CreatedAtAction(nameof(GetCarById), new { id = createdCar.CarId }, createdCar);
+            try
+            {
+                var createdCar = await _carService.AddCarAsync(carRequest);
+                return CreatedAtAction(nameof(GetCarById), new { id = createdCar.CarId }, createdCar);
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
 
-        [HttpPut("UpdateCar/{id}")]
-        public async Task<ActionResult> UpdateCar(int id, CarRequestDTO carDto)
+        // PUT: api/Car/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateCar(int id, [FromForm] CarRequestDTO carRequest)
         {
-            await _carService.UpdateCarAsync(id, carDto);
-            return NoContent();
+            try
+            {
+                var updatedCar = await _carService.UpdateCarAsync(id, carRequest);
+                return Ok(updatedCar);
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound($"Car with ID {id} not found.");
+            }
         }
 
-        [HttpDelete("DeleteCar/{id}")]
-        public async Task<ActionResult> DeleteCar(int id)
+        // DELETE: api/Car/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteCar(int id)
         {
-            await _carService.DeleteCarAsync(id);
-            return NoContent();
+            try
+            {
+                await _carService.DeleteCarAsync(id);
+                return NoContent();
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound($"Car with ID {id} not found.");
+            }
         }
+
+
+
+
     }
 
 

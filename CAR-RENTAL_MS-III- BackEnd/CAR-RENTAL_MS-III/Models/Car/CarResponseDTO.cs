@@ -10,5 +10,6 @@
         public string CategoryName { get; set; }
         public string AvailabilityStatus { get; set; }
         public int UnitsAvailable { get; set; }
+        public string Image { get; set; }
     }
 }

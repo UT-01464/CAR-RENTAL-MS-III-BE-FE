@@ -52,7 +52,7 @@ namespace CAR_RENTAL_MS_III.Services
 
         public async Task<int> CreateRentalAsync(RentalRequestDto rentalRequest)
         {
-            var car = await _carRepository.GetCarByIdAsync(rentalRequest.CarId);
+            var car = await _carRepository.GetByIdAsync(rentalRequest.CarId);
             if (car == null || car.AvailabilityStatus != "Available") throw new Exception("Car is not available for rent.");
 
             var rental = new Rental
@@ -68,7 +68,7 @@ namespace CAR_RENTAL_MS_III.Services
             car.AvailabilityStatus = "Rented";
             car.UnitsAvailable--;
 
-            await _carRepository.UpdateCarAsync(car);
+            await _carRepository.UpdateAsync(car);
             await _rentalRepository.AddRentalAsync(rental);
 
             return rental.RentalId;
@@ -90,12 +90,12 @@ namespace CAR_RENTAL_MS_III.Services
                 rental.OverdueAmount = Math.Ceiling(overdueDays) * (rental.OverdueRatePerDay ?? rental.DailyRate);
             }
 
-            var car = await _carRepository.GetCarByIdAsync(rental.CarId);
+            var car = await _carRepository.GetByIdAsync(rental.CarId);
             car.AvailabilityStatus = "Available";
             car.UnitsAvailable++;
 
             await _rentalRepository.UpdateRentalAsync(rental);
-            await _carRepository.UpdateCarAsync(car);
+            await _carRepository.UpdateAsync(car);
         }
     }
 }

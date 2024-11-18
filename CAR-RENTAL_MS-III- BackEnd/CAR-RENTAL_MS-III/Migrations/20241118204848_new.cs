@@ -91,7 +91,8 @@ namespace CAR_RENTAL_MS_III.Migrations
                     Year = table.Column<int>(type: "int", nullable: false),
                     CategoryId = table.Column<int>(type: "int", nullable: false),
                     AvailabilityStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UnitsAvailable = table.Column<int>(type: "int", nullable: false)
+                    UnitsAvailable = table.Column<int>(type: "int", nullable: false),
+                    Image = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -115,7 +116,10 @@ namespace CAR_RENTAL_MS_III.Migrations
                     ManagerId = table.Column<int>(type: "int", nullable: false),
                     RentalDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ReturnDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    OverdueAmount = table.Column<double>(type: "float", nullable: true),
+                    DailyRate = table.Column<double>(type: "float", nullable: false),
+                    OverdueRatePerDay = table.Column<double>(type: "float", nullable: true)
                 },
                 constraints: table =>
                 {

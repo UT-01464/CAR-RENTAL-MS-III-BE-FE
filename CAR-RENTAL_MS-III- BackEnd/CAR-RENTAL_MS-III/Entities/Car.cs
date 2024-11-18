@@ -31,6 +31,8 @@ namespace CAR_RENTAL_MS_III.Entities
 
         public int UnitsAvailable { get; set; }
 
+        public string Image { get; set; }
+
         public ICollection<Rental> Rentals { get; set; }
 
     }

@@ -42,6 +42,10 @@ namespace CAR_RENTAL_MS_III.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Image")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("Model")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -223,8 +227,17 @@ namespace CAR_RENTAL_MS_III.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
+                    b.Property<double>("DailyRate")
+                        .HasColumnType("float");
+
                     b.Property<int>("ManagerId")
                         .HasColumnType("int");
+
+                    b.Property<double?>("OverdueAmount")
+                        .HasColumnType("float");
+
+                    b.Property<double?>("OverdueRatePerDay")
+                        .HasColumnType("float");
 
                     b.Property<DateTime>("RentalDate")
                         .HasColumnType("datetime2");

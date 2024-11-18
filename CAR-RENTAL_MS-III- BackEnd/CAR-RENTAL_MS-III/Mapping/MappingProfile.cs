@@ -21,6 +21,10 @@ namespace CAR_RENTAL_MS_III.Mapping
             // Mapping between Manager entity and DTOs
             CreateMap<Manager, ManagerResponseDTO>();
             CreateMap<ManagerRequestDTO, Manager>();
+
+            CreateMap<CarRequestDTO, Car>();
+            CreateMap<Car, CarResponseDTO>();
+            CreateMap<CarRequestDTO, CarResponseDTO>();
         }
 
     }
