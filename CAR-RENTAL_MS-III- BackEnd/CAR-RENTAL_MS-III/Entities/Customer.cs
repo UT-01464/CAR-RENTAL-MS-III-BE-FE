@@ -30,20 +30,15 @@ namespace CAR_RENTAL_MS_III.Entities
         public string PasswordHash { get; set; }
 
         [Required]
-        public string ConformPassword { get; set; }
-
-        [Required]
         [StringLength(20)]
         public string PhoneNumber { get; set; }
 
         public string Address { get; set; }
-
         public string Role { get; set; } = "Customer";
-
         public DateTime RegistrationDate { get; set; }
 
-        public ICollection<Rental> Rentals { get; set; }
-       
+        public List<Rental> Rentals { get; set; }
+
 
     }
 }

@@ -5,6 +5,11 @@ namespace CAR_RENTAL_MS_III.I_Repositories
 {
     public interface ICustomerRepository
     {
-        Task<Customer> CreateUserAccount(Customer customer);
+        Task<IEnumerable<Customer>> GetAllCustomersAsync();
+        Task<Customer> GetCustomerByIdAsync(int customerId);
+        Task<Customer> GetCustomerByEmailAsync(string email);
+        Task AddCustomerAsync(Customer customer);
+        Task UpdateCustomerAsync(Customer customer);
+        Task DeleteCustomerAsync(int customerId);
     }
 }

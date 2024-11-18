@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CAR_RENTAL_MS_III.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241116164929_newone")]
-    partial class newone
+    [Migration("20241118035614_new")]
+    partial class @new
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -100,10 +100,6 @@ namespace CAR_RENTAL_MS_III.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CustomerId"));
 
                     b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("ConformPassword")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
