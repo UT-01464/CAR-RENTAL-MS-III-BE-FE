@@ -39,6 +39,9 @@ namespace CAR_RENTAL_MS_III
             builder.Services.AddScoped<IManagerRepository, ManagerRepository>();
             builder.Services.AddScoped<IManagerService,ManagerService>();
 
+            builder.Services.AddScoped<IRentalService, RentalService>();
+            builder.Services.AddScoped<IRentalRepository, RentalRepository>();
+
 
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));

@@ -19,7 +19,7 @@ namespace CAR_RENTAL_MS_III.Controllers
 
 
         // GET: api/CarCategory
-        [HttpGet]
+        [HttpGet("GetCategories")]
         public async Task<ActionResult<IEnumerable<CarCategory>>> GetCategories()
         {
             var categories = await _managerService.GetCategoriesAsync();
@@ -27,7 +27,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // GET: api/CarCategory/{id}
-        [HttpGet("{id}")]
+        [HttpGet("GetCategory{id}")]
         public async Task<ActionResult<CarCategory>> GetCategory(int id)
         {
             var category = await _managerService.GetCategoryByIdAsync(id);
@@ -39,7 +39,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // POST: api/CarCategory
-        [HttpPost]
+        [HttpPost("CreateCategory")]
         public async Task<ActionResult<CarCategory>> CreateCategory(CarCategoryDTO categoryDto)
         {
             var newCategory = await _managerService.CreateCategoryAsync(categoryDto);
@@ -47,7 +47,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // PUT: api/CarCategory/{id}
-        [HttpPut("{id}")]
+        [HttpPut("UpdateCategory{id}")]
         public async Task<IActionResult> UpdateCategory(int id, CarCategoryDTO categoryDto)
         {
             try
@@ -63,7 +63,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // DELETE: api/CarCategory/{id}
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteCategory{id}")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             try

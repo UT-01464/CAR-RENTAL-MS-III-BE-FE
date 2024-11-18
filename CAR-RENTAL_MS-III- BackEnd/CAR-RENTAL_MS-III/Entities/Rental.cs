@@ -25,19 +25,19 @@ namespace CAR_RENTAL_MS_III.Entities
 
         public DateTime? ReturnDate { get; set; }
 
-        public string Status { get; set; }
-        //public ICollection<Payment> Payments { get; set; }
+        [Required]
+        public string Status { get; set; } // "Rented", "Returned"
 
+        public double? OverdueAmount { get; set; } // Overdue charges
 
+        [Required]
+        public double DailyRate { get; set; } // Rate per day for the rental
 
-        // Overdue flag derived from the current date and the ReturnDate
-        public bool IsOverdue
-        {
-            get
-            {
-                return ReturnDate.HasValue && ReturnDate.Value < DateTime.Now && Status != "Completed";
-            }
-        }
+        public double? OverdueRatePerDay { get; set; } // Optional penalty rate per day
 
+        // Determines if the rental is overdue
+        public bool IsOverdue => ReturnDate.HasValue && ReturnDate.Value < DateTime.Now && Status == "Rented";
     }
+
 }
+
