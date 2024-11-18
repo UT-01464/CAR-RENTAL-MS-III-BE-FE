@@ -1,0 +1,28 @@
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    transition: color 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #f39c12;
+}
+
+/* Optional: Adding some padding to the nav links */
+.nav-item {
+    padding: 10px 15px;
+}
+
+/* Change hover effect for mobile and small screens */
+@media (max-width: 767px) {
+    .navbar-nav .nav-link {
+        font-size: 1.2rem;
+    }
+}
