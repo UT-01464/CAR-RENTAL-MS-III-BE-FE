@@ -18,7 +18,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // GET: api/Car
-        [HttpGet]
+        [HttpGet("GetAllCars")]
         public async Task<IActionResult> GetAllCars()
         {
             var cars = await _carService.GetAllCarsAsync();
@@ -26,7 +26,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // GET: api/Car/5
-        [HttpGet("{id}")]
+        [HttpGet("GetCarById{id}")]
         public async Task<IActionResult> GetCarById(int id)
         {
             try
@@ -41,7 +41,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // POST: api/Car
-        [HttpPost]
+        [HttpPost("AddCar")]
         public async Task<IActionResult> AddCar([FromForm] CarRequestDTO carRequest)
         {
             try
@@ -56,7 +56,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // PUT: api/Car/5
-        [HttpPut("{id}")]
+        [HttpPut("UpdateCar{id}")]
         public async Task<IActionResult> UpdateCar(int id, [FromForm] CarRequestDTO carRequest)
         {
             try
@@ -71,7 +71,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // DELETE: api/Car/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteCar{id}")]
         public async Task<IActionResult> DeleteCar(int id)
         {
             try
