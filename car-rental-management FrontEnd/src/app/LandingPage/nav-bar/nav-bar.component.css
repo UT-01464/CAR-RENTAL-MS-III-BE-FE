@@ -14,8 +14,6 @@
 .nav-link:hover {
     color: #f39c12;
 }
-
-/* Optional: Adding some padding to the nav links */
 .nav-item {
     padding: 10px 15px;
 }
@@ -26,3 +24,426 @@
         font-size: 1.2rem;
     }
 }
+
+/*------------------------------------------------ body-------------------------------------------------- */
+
+.backround
+{
+    background-color: rgba(33,37,51,255);
+}
+
+
+
+#full-screen {
+    height: 100vh; /* Full viewport height */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    color: white;
+}
+
+
+
+/*--------------------------------------------------------- Hero Section */
+.hero {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 20px;
+  background-color:rgba(33,37,51,255);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.col-6 {
+  flex: 1;
+  padding: 20px;
+}
+
+.hero-image {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.hero-image:hover {
+  transform: scale(1.1); /* Slightly increase size */
+  filter: brightness(1.2); /* Brighten the image */
+}
+
+/* Text Content Styling */
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.hero-content p {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: #ffffff;
+}
+
+.hero-content .btn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  text-transform: uppercase;
+  transition: background-color 0.3s ease;
+}
+
+.hero-content .btn:hover {
+  background-color: #0056b3;
+}
+
+/* Responsive Styling */
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .col-6 {
+    padding: 10px;
+  }
+
+  .hero-content h1 {
+    font-size: 2rem;
+  }
+
+  .hero-content p {
+    font-size: 1rem;
+  }
+}
+
+
+
+
+/*------------------------------------------------------------- booking */
+
+/* Booking Card */
+.booking-card {
+  background-color:rgba(24,26,34,255);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  width: 80%;
+  max-width: 900px;
+  padding: 20px;
+  margin: 50px auto;
+ 
+}
+
+/* Card Header */
+.card-header {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.card-header h5 {
+  font-size: 1.8rem;
+  color: #fff;
+  margin: 0;
+}
+
+/* Card Body */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Form Row */
+.form-row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap; /* Allows items to wrap on small screens */
+}
+
+/* Input Group */
+.input-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  display: block;
+  color: #ffffff;
+  margin-bottom: 5px;
+}
+
+.input-group input,
+.input-group button {
+  width: 100%;
+  padding: 10px;
+  background-color: rgba(24,26,34,255);
+  border: 1px solid #444;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Focus States */
+.input-group input:focus,
+.input-group button:focus {
+  outline: none;
+  border-color: #0066cc;
+}
+
+/* Button Styling */
+.input-group button {
+  background-color: #0066cc;
+  cursor: pointer;
+  font-size: 1.1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group button:hover {
+  background-color: #005bb5;
+}
+
+.search-btn {
+  padding: 10px;
+  width: 100%;
+  text-align: center;
+  font-size: 1.1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .form-row {
+    flex-direction: column; /* Stack input fields on small screens */
+  }
+
+  .input-group {
+    margin-bottom: 15px; /* Add margin to input groups for better spacing */
+  }
+
+  .card-body {
+    padding: 10px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  /* --------------------------------------------------------Features Section */
+  .features {
+    padding: 50px 20px;
+    text-align: center;
+    color: white;
+  }
+  
+  .features h2 {
+    margin-bottom: 30px;
+  }
+  
+  .feature-cards {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+  }
+  
+  .icard{
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    width: 300px;
+  }
+
+
+  .icard i {
+    font-size: 2rem; /* Increase icon size */
+    padding: 20px; /* Add padding inside the circle */
+   
+    border-radius:25%; /* Makes the surrounding circle perfectly round */
+    display: inline-block; /* Ensures the icon respects the circle */
+    
+  }
+
+  .icard h5 {
+    margin-top: 15px;
+  }
+
+  
+  
+  /*---------------------------------------------------- About Section */
+  .about {
+    padding: 50px 20px;
+    background-color: #f4f4f4;
+    text-align: center;
+  }
+  
+  .about p {
+    max-width: 600px;
+    margin: auto;
+  }
+
+
+  /* -----------------------------------------cars */
+
+  .car h2
+  {
+    color: white;
+    text-align: center;
+    padding-top: 2%;
+  }
+
+  .car-section
+{
+    border: 1px solid black;
+    width: 400px;
+    
+    color: white;
+    background-color: rgba(0, 0, 0, 0.842);
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.75);
+    overflow: hidden;
+    text-align: center;
+
+    
+}
+
+.card-img
+{
+    border-top: 20px;
+    box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.514);
+}
+
+.carName
+{
+  
+
+}
+
+.carprice
+{
+    background-color: black;
+    padding: 1%;
+    box-shadow: 1px white;
+    box-shadow: 0px 0px 1px rgba(250, 250, 250, 0.75);
+    
+    
+}
+
+.row
+{
+    display: flex;
+    justify-content:space-evenly;
+    
+}
+
+.carbtn {
+    display: flex;
+    width: 100%;
+   
+  }
+  
+  .carbtn button {
+    flex: 1; /* Makes each button take up equal width */
+    padding: 20px;
+    background-color: #000000;
+    color: white;
+    border: px solid white;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .carbtn button:hover {
+    background-color: #005bb5;
+  }
+  
+
+
+
+
+
+
+
+
+
+  
+  /*---------------------------------------------------- Contact Section */
+  .contact {
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .contact form {
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  .contact input,
+  .contact textarea {
+    width: 100%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .contact button {
+    background-color: #4caf50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+  
+
+
+  /* ---------------------------------------For car logos */
+
+  .grayscale {
+    filter: grayscale(100%);
+    transition: filter 0.3s ease-in-out; 
+  }
+  
+  .grayscale:hover {
+    filter: grayscale(0%);
+  }
+
+
+  .logos
+  {
+    background-color: rgba(29,32,45,255);
+  }
