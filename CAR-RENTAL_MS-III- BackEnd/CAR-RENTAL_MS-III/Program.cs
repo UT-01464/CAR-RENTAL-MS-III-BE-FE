@@ -5,7 +5,10 @@ using CAR_RENTAL_MS_III.I_Services;
 using CAR_RENTAL_MS_III.Mapping;
 using CAR_RENTAL_MS_III.Repositories;
 using CAR_RENTAL_MS_III.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using System.Text;
 
 namespace CAR_RENTAL_MS_III
 {
@@ -42,9 +45,33 @@ namespace CAR_RENTAL_MS_III
             builder.Services.AddScoped<IRentalService, RentalService>();
             builder.Services.AddScoped<IRentalRepository, RentalRepository>();
 
+            builder.Services.AddScoped<IAuthService, AuthService>();
+            builder.Services.AddScoped<IAuthRepository, AuthRepository>();
+
 
 
             builder.Services.AddAutoMapper(typeof(MappingProfile));
+
+
+
+            builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = builder.Configuration["Jwt:Issuer"],
+                    ValidAudience = builder.Configuration["Jwt:Audience"],
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(builder.Configuration["Jwt:Key"]))
+                };
+            });
+
 
 
 

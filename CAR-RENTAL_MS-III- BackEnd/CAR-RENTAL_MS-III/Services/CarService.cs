@@ -113,6 +113,11 @@ namespace CAR_RENTAL_MS_III.Services
             await _carRepository.DeleteAsync(car);
         }
 
+        public async Task<IEnumerable<Car>> GetCarsByCategoryIdAsync(int categoryId)
+        {
+            return await _carRepository.GetByCategoryIdAsync(categoryId);
+        }
+
 
 
 

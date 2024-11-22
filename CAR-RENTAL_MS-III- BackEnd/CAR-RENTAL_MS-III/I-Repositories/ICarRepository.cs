@@ -9,5 +9,7 @@ namespace CAR_RENTAL_MS_III.I_Repositories
         Task<IEnumerable<Car>> GetAllAsync();
         Task<Car> UpdateAsync(Car car);
         Task DeleteAsync(Car car);
+
+        Task<IEnumerable<Car>> GetByCategoryIdAsync(int categoryId);
     }
 }

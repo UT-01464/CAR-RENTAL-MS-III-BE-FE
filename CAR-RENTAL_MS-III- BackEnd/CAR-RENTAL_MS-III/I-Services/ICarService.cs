@@ -13,6 +13,8 @@ namespace CAR_RENTAL_MS_III.I_Services
         Task<CarResponseDTO> UpdateCarAsync(int id, CarRequestDTO carRequest);
         Task DeleteCarAsync(int id);
 
+        Task<IEnumerable<Car>> GetCarsByCategoryIdAsync(int categoryId);
+
 
 
     }

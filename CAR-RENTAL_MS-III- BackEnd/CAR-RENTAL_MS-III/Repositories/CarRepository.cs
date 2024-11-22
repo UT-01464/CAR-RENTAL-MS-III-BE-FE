@@ -47,6 +47,15 @@ namespace CAR_RENTAL_MS_III.Repositories
         }
 
 
+        public async Task<IEnumerable<Car>> GetByCategoryIdAsync(int categoryId)
+        {
+            return await _dbContext.Cars
+                .Include(c => c.Category)
+                .Where(c => c.CategoryId == categoryId)
+                .ToListAsync();
+        }
+
+
 
     }
 }

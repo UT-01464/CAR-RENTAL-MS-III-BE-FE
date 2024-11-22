@@ -86,6 +86,27 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
 
+        //get by Category
+
+        [HttpGet("category/{categoryId}")]
+        public async Task<IActionResult> GetCarsByCategory(int categoryId)
+        {
+            try
+            {
+                var cars = await _carService.GetCarsByCategoryIdAsync(categoryId);
+                if (cars == null || !cars.Any())
+                {
+                    return NotFound("No cars found for the specified category.");
+                }
+                return Ok(cars);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+
 
 
     }
