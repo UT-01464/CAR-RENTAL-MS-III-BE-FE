@@ -8,8 +8,7 @@ import { NavBarComponent } from './LandingPage/nav-bar/nav-bar.component';
   standalone: true,
   imports: [RouterOutlet,
     RouterModule,
-    CommonModule,
-  NavBarComponent],
+    CommonModule,],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

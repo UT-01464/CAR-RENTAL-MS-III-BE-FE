@@ -1,4 +1,31 @@
-<section class="h-100 h-custom gradient-custom-2">
+<form (ngSubmit)="onRegister()">
+  <input type="text" placeholder="NIC Number" [(ngModel)]="customer.nicNumber" name="nicNumber" required />
+  <input type="text" placeholder="First Name" [(ngModel)]="customer.firstName" name="firstName" required />
+  <input type="text" placeholder="Last Name" [(ngModel)]="customer.lastName" name="lastName" required />
+  <input type="text" placeholder="Username" [(ngModel)]="customer.username" name="username" required />
+  <input type="email" placeholder="Email" [(ngModel)]="customer.email" name="email" required />
+  <input type="password" placeholder="Password" [(ngModel)]="customer.passwordHash" name="password" required />
+  <button type="submit">Register</button>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section class="h-100 h-custom gradient-custom-2">
     <div class="container py-5 h-100">
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col-12">
@@ -165,4 +192,4 @@
         </div>
       </div>
     </div>
-  </section>
+  </section> -->

@@ -73,6 +73,21 @@ namespace CAR_RENTAL_MS_III
             });
 
 
+            // Add CORS policy to allow all origins
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy("AllowAllOrigins", builder =>
+                    builder.AllowAnyOrigin()  // Allow any origin (can be limited to specific domains)
+                           .AllowAnyMethod()  // Allow any HTTP methods (GET, POST, etc.)
+                           .AllowAnyHeader()); // Allow any headers
+            });
+
+
+
+
+
+
+
 
 
 
@@ -89,6 +104,11 @@ namespace CAR_RENTAL_MS_III
 
             app.UseHttpsRedirection();
 
+            // Enable CORS with the policy defined above
+            app.UseCors("AllowAllOrigins");
+
+
+            app.UseAuthentication();
             app.UseAuthorization();
 
 
