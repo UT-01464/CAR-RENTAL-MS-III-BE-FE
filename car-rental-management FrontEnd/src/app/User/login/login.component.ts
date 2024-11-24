@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { AuthService } from '../../Service/auth.service';
+import { AuthService, User } from '../../Service/auth.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -22,18 +22,27 @@ export class LoginComponent {
   onLogin() {
     this.authService.login(this.user).subscribe(
       (response: any) => {
-        this.authService.saveToken(response.token);
-        if (response.role === 'Admin') {
-          this.router.navigate(['/admin']); // Redirect Admin to admin page
-        } else {
-          this.router.navigate(['/user']); // Redirect User to user page
+        if (response && response.token) {
+          this.authService.saveToken(response.token);
+          const userDetails = {
+            username: response.username,
+            email: response.email,
+          };
+          localStorage.setItem('currentUser', JSON.stringify(userDetails));
+  
+          // Navigate based on role
+          if (response.role === 'Admin') {
+            this.router.navigate(['/admin']);
+          } else {
+            this.router.navigate(['/user']);
+          }
         }
       },
       (error) => {
-        this.errorMessage = 'Invalid username or password.';
-        console.error(error);
+        console.error('Login failed:', error);
+        alert('Invalid username or password.');
       }
     );
   }
-
+  
 }

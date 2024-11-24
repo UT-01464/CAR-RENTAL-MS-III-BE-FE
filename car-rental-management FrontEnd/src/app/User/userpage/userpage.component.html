@@ -3,4 +3,85 @@
     <p>This is your dashboard. You can manage your rentals here.</p>
     <button (click)="logout()">Logout</button>
   </div>
+
+  
+  <section class="container">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">CARENAL</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link text-light" href="/home">HOME</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">MY RENTALS</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">RENT A CAR</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#">PROFILE</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link text-light" href="#" (click)="logout()">LOGOUT</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </section>
+  
+  <!-- Main User Page -->
+  <div class="dashboard-container">
+    <section class="hero text-center">
+      <h1>Welcome, {{ username }}</h1>
+      <p>Manage your car rentals with ease!</p>
+    </section>
+  
+    <section class="user-options">
+      <div class="card">
+        <h3>My Rentals</h3>
+        <p>View your rental history and active rentals.</p>
+        <button class="btn btn-primary" (click)="navigateTo('rentals')">View Rentals</button>
+      </div>
+      <div class="card">
+        <h3>Available Cars</h3>
+        <p>Browse and rent cars that suit your needs.</p>
+        <button class="btn btn-primary" (click)="navigateTo('cars')">Browse Cars</button>
+      </div>
+      <div class="card">
+        <h3>Profile Settings</h3>
+        <p>Update your profile information and preferences.</p>
+        <button class="btn btn-primary" (click)="navigateTo('profile')">Edit Profile</button>
+      </div>
+    </section>
+  
+    <!-- Recent Rentals -->
+    <section class="recent-rentals">
+      <h2>Your Recent Rentals</h2>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Car Name</th>
+            <th>Rental Date</th>
+            <th>Return Date</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rental of recentRentals">
+            <td>{{ rental.carName }}</td>
+            <td>{{ rental.rentalDate }}</td>
+            <td>{{ rental.returnDate }}</td>
+            <td>{{ rental.status }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
   

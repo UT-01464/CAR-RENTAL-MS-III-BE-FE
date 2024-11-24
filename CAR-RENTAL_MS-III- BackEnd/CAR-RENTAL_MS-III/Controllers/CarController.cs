@@ -1,4 +1,5 @@
-﻿using CAR_RENTAL_MS_III.I_Services;
+﻿using CAR_RENTAL_MS_III.Entities;
+using CAR_RENTAL_MS_III.I_Services;
 using CAR_RENTAL_MS_III.Models.Car;
 using CAR_RENTAL_MS_III.Services;
 using Microsoft.AspNetCore.Http;
@@ -104,6 +105,155 @@ namespace CAR_RENTAL_MS_III.Controllers
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+
+
+        // GET: api/Model/Cars
+        [HttpGet("GetAllCarsWithDetails")]
+        public async Task<IActionResult> GetAllCarsWithDetails()
+        {
+            var cars = await _carService.GetAllCarsWithDetailsAsync();
+            return Ok(cars);
+        }
+
+
+
+
+
+        //----------------------------------------------------------- Model--------------------------------
+
+        // GET: api/Model/{id}
+        [HttpGet("GetModelById{id}")]
+        public async Task<IActionResult> GetModelById(int id)
+        {
+            var modelDto = await _carService.GetModelByIdAsync(id);
+            if (modelDto == null)
+            {
+                return NotFound(new { Message = $"Model with ID {id} not found." });
+            }
+
+            return Ok(modelDto);
+        }
+
+        // GET: api/Model
+        [HttpGet("GetAllModels")]
+        public async Task<IActionResult> GetAllModels()
+        {
+            var models = await _carService.GetAllModelsAsync();
+            return Ok(models);
+        }
+
+        // POST: api/Model
+        [HttpPost("CreateModel")]
+        public async Task<IActionResult> CreateModel([FromBody] ModelDto modelDto)
+        {
+            if (modelDto == null)
+                return BadRequest(new { Message = "Model data is required." });
+
+            var createdModelDto = await _carService.CreateModelAsync(modelDto);
+            return CreatedAtAction(nameof(GetModelById), new { id = createdModelDto.ModelId }, createdModelDto);
+        }
+
+        // PUT: api/Model/{id}
+        [HttpPut("UpdateModel{id}")]
+        public async Task<IActionResult> UpdateModel(int id, [FromBody] ModelDto updatedModelDto)
+        {
+            if (updatedModelDto == null)
+                return BadRequest(new { Message = "Updated model data is required." });
+
+            try
+            {
+                var updatedModelDtoResponse = await _carService.UpdateModelAsync(id, updatedModelDto);
+                return Ok(updatedModelDtoResponse);
+            }
+            catch (KeyNotFoundException ex)
+            {
+                return NotFound(new { Message = ex.Message });
+            }
+        }
+
+        // DELETE: api/Model/{id}
+        [HttpDelete("DeleteModel{id}")]
+        public async Task<IActionResult> DeleteModel(int id)
+        {
+            var success = await _carService.DeleteModelAsync(id);
+            if (!success)
+                return NotFound(new { Message = $"Model with ID {id} not found." });
+
+            return NoContent();
+        }
+
+
+
+
+
+
+
+        //-----------------------------------------------------Brand
+
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<BrandDto>>> GetBrands()
+        {
+            var brands = await _carService.GetAllBrandsAsync();  // Get all brands as BrandDto
+            return Ok(brands);
+        }
+
+        // GET: api/brand/5
+        [HttpGet("{id}")]
+        public async Task<ActionResult<BrandDto>> GetBrand(int id)
+        {
+            var brand = await _carService.GetBrandByIdAsync(id);  // Get brand by ID as BrandDto
+            if (brand == null)
+            {
+                return NotFound();  // If brand not found, return NotFound
+            }
+            return Ok(brand);  // Return the brand as BrandDto
+        }
+
+        // POST: api/brand
+        [HttpPost]
+        public async Task<ActionResult<BrandDto>> CreateBrand(BrandDto brandDto)
+        {
+            if (brandDto == null)
+            {
+                return BadRequest();  // If the request body is invalid, return BadRequest
+            }
+
+            var createdBrand = await _carService.CreateBrandAsync(brandDto);  // Create the brand
+            return CreatedAtAction(nameof(GetBrand), new { id = createdBrand.BrandId }, createdBrand);  // Return the created brand
+        }
+
+        // PUT: api/brand/5
+        [HttpPut("{id}")]
+        public async Task<IActionResult> UpdateBrand(int id, BrandDto brandDto)
+        {
+            if (id != brandDto.BrandId)
+            {
+                return BadRequest();  // If IDs don't match, return BadRequest
+            }
+
+            var updatedBrand = await _carService.UpdateBrandAsync(brandDto);  // Update the brand
+            if (updatedBrand == null)
+            {
+                return NotFound();  // If brand was not found, return NotFound
+            }
+
+            return NoContent();  // If update was successful, return NoContent
+        }
+
+        // DELETE: api/brand/5
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> DeleteBrand(int id)
+        {
+            var brand = await _carService.GetBrandByIdAsync(id);
+            if (brand == null)
+            {
+                return NotFound();  // If brand not found, return NotFound
+            }
+
+            await _carService.DeleteBrandAsync(id);  // Delete the brand
+            return NoContent();  // Return NoContent after successful deletion
         }
 
 

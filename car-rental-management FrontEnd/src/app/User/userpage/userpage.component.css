@@ -1,4 +1,4 @@
-.user-container {
+/* .user-container {
     text-align: center;
     padding: 20px;
   }
@@ -19,5 +19,51 @@
   
   .user-container button:hover {
     background-color: #0056b3;
+  }
+   */
+
+
+   .dashboard-container {
+    padding: 100px 20px;
+  }
+  
+  .hero {
+    margin: 50px 0;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+  }
+  
+  .user-options {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+  }
+  
+  .card {
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    width: 30%;
+    text-align: center;
+  }
+  
+  .card h3 {
+    margin-bottom: 15px;
+  }
+  
+  .recent-rentals {
+    margin-top: 50px;
+  }
+  
+  .recent-rentals table {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  .recent-rentals th,
+  .recent-rentals td {
+    padding: 10px;
+    text-align: center;
   }
   

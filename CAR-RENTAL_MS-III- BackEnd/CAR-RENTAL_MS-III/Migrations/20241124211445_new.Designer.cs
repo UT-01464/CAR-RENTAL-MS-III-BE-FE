@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CAR_RENTAL_MS_III.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20241118204848_new")]
+    [Migration("20241124211445_new")]
     partial class @new
     {
         /// <inheritdoc />
@@ -25,6 +25,24 @@ namespace CAR_RENTAL_MS_III.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Brand", b =>
+                {
+                    b.Property<int>("BrandId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BrandId"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.HasKey("BrandId");
+
+                    b.ToTable("Brands");
+                });
+
             modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Car", b =>
                 {
                     b.Property<int>("CarId")
@@ -33,14 +51,8 @@ namespace CAR_RENTAL_MS_III.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("CarId"));
 
-                    b.Property<string>("AvailabilityStatus")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Brand")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
+                    b.Property<int>("AvailabilityStatus")
+                        .HasColumnType("int");
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
@@ -49,10 +61,8 @@ namespace CAR_RENTAL_MS_III.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Model")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<int>("ModelId")
+                        .HasColumnType("int");
 
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
@@ -68,6 +78,8 @@ namespace CAR_RENTAL_MS_III.Migrations
                     b.HasKey("CarId");
 
                     b.HasIndex("CategoryId");
+
+                    b.HasIndex("ModelId");
 
                     b.ToTable("Cars");
                 });
@@ -190,6 +202,29 @@ namespace CAR_RENTAL_MS_III.Migrations
                     b.ToTable("Managers");
                 });
 
+            modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Model", b =>
+                {
+                    b.Property<int>("ModelId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ModelId"));
+
+                    b.Property<int>("BrandId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.HasKey("ModelId");
+
+                    b.HasIndex("BrandId");
+
+                    b.ToTable("Models");
+                });
+
             modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Notification", b =>
                 {
                     b.Property<int>("Id")
@@ -248,9 +283,8 @@ namespace CAR_RENTAL_MS_III.Migrations
                     b.Property<DateTime?>("ReturnDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("Status")
+                        .HasColumnType("int");
 
                     b.HasKey("RentalId");
 
@@ -298,7 +332,26 @@ namespace CAR_RENTAL_MS_III.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("CAR_RENTAL_MS_III.Entities.Model", "Model")
+                        .WithMany()
+                        .HasForeignKey("ModelId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("Category");
+
+                    b.Navigation("Model");
+                });
+
+            modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Model", b =>
+                {
+                    b.HasOne("CAR_RENTAL_MS_III.Entities.Brand", "Brand")
+                        .WithMany("Models")
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Brand");
                 });
 
             modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Notification", b =>
@@ -337,6 +390,11 @@ namespace CAR_RENTAL_MS_III.Migrations
                     b.Navigation("Customer");
 
                     b.Navigation("Manager");
+                });
+
+            modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Brand", b =>
+                {
+                    b.Navigation("Models");
                 });
 
             modelBuilder.Entity("CAR_RENTAL_MS_III.Entities.Car", b =>
