@@ -7,6 +7,7 @@ import { DashboardComponent } from './Admin/dashboard/dashboard.component';
 import { ListCustomerComponent } from './Admin/Customers/list-customer/list-customer.component';
 import { CustomerReportsComponent } from './Admin/Reports/customer-reports/customer-reports.component';
 import { ListCarsComponent } from './Admin/Cars/list-cars/list-cars.component';
+import { AddCarComponent } from './Admin/Cars/add-car/add-car.component';
 
 
 export const routes: Routes = [
@@ -24,6 +25,8 @@ export const routes: Routes = [
     {path:'admin',component:DashboardComponent },
     {path:'customer',component:ListCustomerComponent},
     {path:'reports',component:CustomerReportsComponent},
-    {path:'cars',component:ListCarsComponent}
+    {path:'cars',component:ListCarsComponent},
+    {path:'addCar',component:AddCarComponent}
+
 
 ];

@@ -8,8 +8,8 @@
             <!-- [(ngModel)]="searchText"  -->
           </div>
           <div class="ml-auto p-2">
-            <button type="button" class="btn btn-dark">New Task</button>
-            <!-- [routerLink]="['/task-add']" -->
+            <button type="button" class="btn btn-dark" [routerLink]="['/addCar']" >New Task</button>
+            
           </div>
         </div>
   
@@ -21,6 +21,7 @@
               <th scope="col">Brand</th>
               <th scope="col">Year</th>
               <th scope="col">UnitsAvailable</th>
+              <th scope="col">Status</th>
               <th scope="col">image</th>
               <th scope="col">Action</th>
             </tr>
@@ -32,6 +33,7 @@
               <td>{{item.brandName}}</td>
               <td>{{item.year}}</td>
               <td>{{item.unitsAvailable }}</td> 
+              <td>{{item.availabilityStatus}}</td> 
               <td>{{item.imageUrl}}</td>
               <!-- | date: 'dd-MMM-yyyy' -->
              

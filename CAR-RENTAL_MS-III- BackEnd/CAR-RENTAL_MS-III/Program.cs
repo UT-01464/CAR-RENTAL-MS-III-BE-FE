@@ -20,7 +20,19 @@ namespace CAR_RENTAL_MS_III
 
             // Add services to the container.
 
-            builder.Services.AddControllers();
+
+
+            builder.Services.AddControllers()
+                .AddJsonOptions(options =>
+                {
+                    options.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles;
+                    options.JsonSerializerOptions.PropertyNamingPolicy = System.Text.Json.JsonNamingPolicy.CamelCase; // Optional: Use camelCase for property names
+                    options.JsonSerializerOptions.WriteIndented = true; // Optional: For readable JSON
+                });
+
+
+
+
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();

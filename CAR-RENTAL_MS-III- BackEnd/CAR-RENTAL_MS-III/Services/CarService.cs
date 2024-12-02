@@ -97,6 +97,61 @@ namespace CAR_RENTAL_MS_III.Services
         //}
 
 
+
+
+        //public async Task<CarResponseDTO> AddCarAsync(CarRequestDTO carRequest)
+        //{
+        //    // Validate model existence
+        //    var model = await _carRepository.GetModelByIdAsync(carRequest.ModelId);
+        //    if (model == null)
+        //        throw new ArgumentException("Invalid Model ID.");
+
+        //    // Check for duplicate registration number
+        //    var existingCar = await _carRepository.GetCarByRegistrationNumberAsync(carRequest.RegistrationNumber);
+        //    if (existingCar != null)
+        //        throw new ArgumentException($"A car with registration number {carRequest.RegistrationNumber} already exists.");
+
+        //    // Map request to entity
+        //    var carEntity = _mapper.Map<Car>(carRequest);
+        //    carEntity.Model = model;
+
+        //    // Handle image upload
+        //    if (carRequest.ImageFile != null && carRequest.ImageFile.Length > 0)
+        //    {
+        //        try
+        //        {
+        //            var fileName = Path.GetFileName(carRequest.ImageFile.FileName);
+        //            var uniqueFileName = $"{Guid.NewGuid()}_{fileName}";
+        //            var filePath = Path.Combine(_imageUploadPath, uniqueFileName);
+
+        //            if (!Directory.Exists(_imageUploadPath))
+        //            {
+        //                Directory.CreateDirectory(_imageUploadPath);
+        //            }
+
+        //            using (var stream = new FileStream(filePath, FileMode.Create))
+        //            {
+        //                await carRequest.ImageFile.CopyToAsync(stream);
+        //            }
+
+        //            carEntity.Image = uniqueFileName;
+        //        }
+        //        catch (Exception ex)
+        //        {
+        //            throw new Exception("Image upload failed.", ex);
+        //        }
+        //    }
+
+        //    // Save car to repository
+        //    var createdCar = await _carRepository.AddAsync(carEntity);
+
+        //    // Map entity to response DTO
+        //    return _mapper.Map<CarResponseDTO>(createdCar);
+        //}
+
+
+
+
         public async Task<IEnumerable<CarResponseDTO>> GetAllCarsAsync()
         {
             var cars = await _carRepository.GetAllWithDetailsAsync();

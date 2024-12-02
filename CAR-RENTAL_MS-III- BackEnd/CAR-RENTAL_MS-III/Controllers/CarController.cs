@@ -41,8 +41,8 @@ namespace CAR_RENTAL_MS_III.Controllers
             }
         }
 
-        // POST: api/Car
-        [HttpPost("AddCar")]
+        //POST: api/Car
+       [HttpPost("AddCar")]
         public async Task<IActionResult> AddCar([FromForm] CarRequestDTO carRequest)
         {
             try
@@ -55,6 +55,33 @@ namespace CAR_RENTAL_MS_III.Controllers
                 return BadRequest(ex.Message);
             }
         }
+
+      
+
+
+        [HttpPost("UploadImage")]
+        public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+            {
+                return BadRequest("No image file provided.");
+            }
+
+            var fileName = Path.GetFileName(file.FileName);
+            var filePath = Path.Combine("wwwroot/images", fileName); // Adjust the path as needed
+
+            using (var stream = new FileStream(filePath, FileMode.Create))
+            {
+                await file.CopyToAsync(stream);
+            }
+
+            return Ok(new { imagePath = filePath }); // Return the image path to the frontend
+        }
+
+
+
+
+
 
         // PUT: api/Car/5
         [HttpPut("UpdateCar{id}")]
@@ -192,7 +219,7 @@ namespace CAR_RENTAL_MS_III.Controllers
 
         //-----------------------------------------------------Brand
 
-        [HttpGet]
+        [HttpGet("GetAllBrands")]
         public async Task<ActionResult<IEnumerable<BrandDto>>> GetBrands()
         {
             var brands = await _carService.GetAllBrandsAsync();  // Get all brands as BrandDto
@@ -200,7 +227,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // GET: api/brand/5
-        [HttpGet("{id}")]
+        [HttpGet("GetBrand/{id}")]
         public async Task<ActionResult<BrandDto>> GetBrand(int id)
         {
             var brand = await _carService.GetBrandByIdAsync(id);  // Get brand by ID as BrandDto
@@ -212,7 +239,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // POST: api/brand
-        [HttpPost]
+        [HttpPost("CreateBrand")]
         public async Task<ActionResult<BrandDto>> CreateBrand(BrandDto brandDto)
         {
             if (brandDto == null)
@@ -225,7 +252,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // PUT: api/brand/5
-        [HttpPut("{id}")]
+        [HttpPut("UpdateBrand/{id}")]
         public async Task<IActionResult> UpdateBrand(int id, BrandDto brandDto)
         {
             if (id != brandDto.BrandId)
@@ -243,7 +270,7 @@ namespace CAR_RENTAL_MS_III.Controllers
         }
 
         // DELETE: api/brand/5
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteBrand/{id}")]
         public async Task<IActionResult> DeleteBrand(int id)
         {
             var brand = await _carService.GetBrandByIdAsync(id);

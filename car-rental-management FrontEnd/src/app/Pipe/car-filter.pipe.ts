@@ -6,11 +6,14 @@ import { Cars } from '../Service/cars.service';
   standalone: true
 })
 export class CarFilterPipe implements PipeTransform {
-  transform(value: Cars[], ...args: string[]): Cars[] {
-    let searchText = args[0];
+  transform(value: Cars[], searchText: string = ''): Cars[] {
+    // Return the full list if no search text or value is null/undefined
+    if (!value || !Array.isArray(value)) return [];
+    if (!searchText) return value;
 
-    return value.filter(a => a.registrationNumber.toLowerCase().includes(searchText.toLowerCase()))
-    
-
+    // Perform filtering
+    return value.filter(car => 
+      car.registrationNumber?.toLowerCase().includes(searchText.toLowerCase())
+    );
   }
 }

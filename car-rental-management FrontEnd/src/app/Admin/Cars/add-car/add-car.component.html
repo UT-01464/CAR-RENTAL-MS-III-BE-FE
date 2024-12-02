@@ -1,21 +1,100 @@
-<!-- Cars Section -->
-<section id="cars" class="mt-4">
-    <h2 class="text-primary">Manage Cars</h2>
-    <form class="bg-white p-4 rounded shadow-sm">
-      <div class="mb-3">
-        <label for="carName" class="form-label">Car Name:</label>
-        <input type="text" id="carName" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="carType" class="form-label">Car Type:</label>
-        <input type="text" id="carType" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <label for="carBrand" class="form-label">Car Brand:</label>
-        <input type="text" id="carBrand" class="form-control" required>
-      </div>
-      <div class="mb-3">
-        <button type="submit" class="btn btn-primary">Add Car</button>
-      </div>
-    </form>
-  </section>
+<div class="container col d-flex justify-content-center">
+  <div class="card shadow p-3 mb-5 bg-white rounded">
+    <div class="card-header">
+      <h3>Add New Car</h3>
+    </div>
+    <div class="card-body" style="width: 400px;">
+
+      <form [formGroup]="carForm" (ngSubmit)="onSubmit()">
+
+        <!-- Registration Number -->
+        <div class="mb-3">
+          <label for="registrationNumber" class="form-label">Registration Number</label>
+          <input type="text" class="form-control" id="registrationNumber" formControlName="registrationNumber">
+          <div *ngIf="carForm.get('registrationNumber')?.invalid && carForm.get('registrationNumber')?.touched" class="text-danger">
+            Registration number is required.
+          </div>
+        </div>
+
+        <!-- Model -->
+        <div class="mb-3">
+          <label for="modelName" class="form-label">Model</label>
+          <select class="form-control" id="modelName" formControlName="modelName">
+            <option *ngFor="let model of models" [value]="model.modelId">{{ model.name}}</option>
+          </select>
+          <div *ngIf="carForm.get('modelName')?.invalid && carForm.get('modelName')?.touched" class="text-danger">
+            Model is required.
+          </div>
+        </div>
+
+        <!-- Brand -->
+        <div class="mb-3">
+          <label for="brandName" class="form-label">Brand</label>
+          <select class="form-control" id="brandName" formControlName="brandName" (change)="onBrandChange($event)">
+            <option value="" disabled selected>Select Brand</option>
+            <option *ngFor="let brand of brands" [value]="brand.brandId">{{ brand.name }}</option>
+          </select>
+          <div *ngIf="carForm.get('brandName')?.invalid && carForm.get('brandName')?.touched" class="text-danger">
+            Brand is required.
+          </div>
+        </div>
+
+        <!-- Year -->
+        <div class="mb-3">
+          <label for="year" class="form-label">Year</label>
+          <input type="number" class="form-control" id="year" formControlName="year">
+          <div *ngIf="carForm.get('year')?.invalid && carForm.get('year')?.touched" class="text-danger">
+            Year is required.
+          </div>
+        </div>
+
+        <!-- Category -->
+        <div class="mb-3">
+          <label for="categoryName" class="form-label">Category</label>
+          <select class="form-control" id="categoryName" formControlName="categoryName">
+            <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+          </select>
+          <div *ngIf="carForm.get('categoryName')?.invalid && carForm.get('categoryName')?.touched" class="text-danger">
+            Category is required.
+          </div>
+        </div>
+
+        <!-- Units Available -->
+        <div class="mb-3">
+          <label for="unitsAvailable" class="form-label">Units Available</label>
+          <input type="number" class="form-control" id="unitsAvailable" formControlName="unitsAvailable">
+          <div *ngIf="carForm.get('unitsAvailable')?.invalid && carForm.get('unitsAvailable')?.touched" class="text-danger">
+            Units available is required.
+          </div>
+        </div>
+
+        <!-- Availability Status -->
+        <div class="mb-3">
+          <label for="availabilityStatus" class="form-label">Availability Status</label>
+          <select class="form-control" id="availabilityStatus" formControlName="availabilityStatus">
+            <option value="Available">Available</option>
+            <option value="Unavailable">Unavailable</option>
+          </select>
+        </div>
+
+        <!-- Car Image -->
+        <div class="mb-3">
+          <label for="imageUrl" class="form-label">Car Image</label>
+          <input type="file" class="form-control" id="imageUrl" (change)="onFileChange($event)">
+          <div *ngIf="!selectedFile && carForm.get('imageUrl')?.touched" class="text-danger">
+            Car image is required.
+          </div>
+        </div>
+
+        <!-- Submit and Cancel Buttons -->
+        <div class="mb-3 mx-auto">
+          <button type="submit" class="btn btn-primary me-2" >Submit</button>
+          <button type="button" (click)="cancel()" class="btn btn-secondary">Cancel</button>
+        </div>
+
+      </form>
+
+    </div>
+  </div>
+
+</div>

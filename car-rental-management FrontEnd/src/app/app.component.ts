@@ -4,6 +4,8 @@ import { RouterModule, RouterOutlet } from '@angular/router';
 import { NavBarComponent } from './LandingPage/nav-bar/nav-bar.component';
 
 
+
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -21,6 +23,8 @@ import { NavBarComponent } from './LandingPage/nav-bar/nav-bar.component';
 export class AppComponent {
   title = 'car-rental-management';
 
+
+  
   
 
 }
