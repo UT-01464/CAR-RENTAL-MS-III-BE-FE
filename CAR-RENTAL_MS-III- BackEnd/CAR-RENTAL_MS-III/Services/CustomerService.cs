@@ -56,7 +56,8 @@ namespace CAR_RENTAL_MS_III.Services
                 Address = customerResponseDTO.Address,
                 RegistrationDate = DateTime.UtcNow,
                 //PasswordHash = passwordHasher.HashPassword(null, customerResponseDTO.Password)
-                PasswordHash=BCrypt.Net.BCrypt.HashPassword(customerResponseDTO.Password)
+                PasswordHash=BCrypt.Net.BCrypt.HashPassword(customerResponseDTO.Password),
+               
             };
 
             await _customerRepository.AddCustomerAsync(customer);

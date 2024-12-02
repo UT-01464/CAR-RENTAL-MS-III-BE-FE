@@ -2,6 +2,7 @@
 using CAR_RENTAL_MS_III.I_Services;
 using CAR_RENTAL_MS_III.Models.Customer;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,10 +13,12 @@ namespace CAR_RENTAL_MS_III.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthService _authService;
+        private readonly ICustomerService _customerService;
 
-        public AuthenticationController(IAuthService authService)
+        public AuthenticationController(IAuthService authService, ICustomerService customerService)
         {
             _authService = authService;
+            _customerService = customerService;
         }
 
 
@@ -41,6 +44,9 @@ namespace CAR_RENTAL_MS_III.Controllers
 
             return Ok(new { Token = token });
         }
+
+
+
 
 
 

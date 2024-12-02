@@ -1,0 +1,39 @@
+/* Dashboard component styles */
+.container-fluid {
+    display: flex;
+    flex-wrap: nowrap;
+  }
+  
+  .sidebar {
+    background-color: #f8f9fa;
+    height: 100vh;
+    padding: 20px;
+  }
+  
+  .main-content {
+    padding: 20px;
+    background-color: #f4f4f4;
+    flex-grow: 1;
+  }
+  
+  .card {
+    margin-bottom: 20px;
+  }
+  
+  .card-body {
+    text-align: center;
+  }
+  
+  .sidebar-toggle {
+    display: none;
+  }
+  
+  @media (max-width: 991px) {
+    .sidebar {
+      display: none;
+    }
+    .sidebar-toggle {
+      display: block;
+    }
+  }
+  

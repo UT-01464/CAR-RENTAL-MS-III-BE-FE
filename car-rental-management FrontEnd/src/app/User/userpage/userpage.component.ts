@@ -3,7 +3,8 @@ import { AuthService } from '../../Service/auth.service';
 import { CommonModule } from '@angular/common';
 
 import { FormsModule } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router  } from '@angular/router';
+
 
 @Component({
   selector: 'app-userpage',
