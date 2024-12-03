@@ -52,7 +52,7 @@
         <div class="mb-3">
           <label for="categoryName" class="form-label">Category</label>
           <select class="form-control" id="categoryName" formControlName="categoryName">
-            <option *ngFor="let category of categories" [value]="category.name">{{ category.name }}</option>
+            <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
           </select>
           <div *ngIf="carForm.get('categoryName')?.invalid && carForm.get('categoryName')?.touched" class="text-danger">
             Category is required.

@@ -30,13 +30,13 @@ export class AddCarComponent {
   ) {
     this.carForm = this.fb.group({
       registrationNumber: ['', Validators.required],
-      modelName: ['', Validators.required],
-      brandName: ['', Validators.required],
+      modelId: ['', Validators.required],
+      brandId: ['', Validators.required],
       year: ['', Validators.required],
-      categoryName: ['', Validators.required],
+      cate: ['', Validators.required],
       unitsAvailable: ['', Validators.required],
       availabilityStatus: ['', Validators.required],
-      imageUrl: [null, Validators.required]
+      imageUrl: [null]
     });
     
   }
@@ -117,41 +117,88 @@ export class AddCarComponent {
   // }
 
 
+  // onSubmit(): void {
+  //   if (this.carForm.invalid) {
+  //     console.log("Form submitted:", this.carForm.value)
+  //     console.log("Form is invalid"); // This helps verify if the form is invalid
+  //     return; // Stop if form is invalid
+  //   }
+  
+  //   console.log("Form submitted:", this.carForm.value); // Log form values to see if they're correct
+  
+  //   // Prepare FormData (or Car object) to be sent
+  //   const formData = new FormData();
+  //   formData.append('registrationNumber', this.carForm.get('registrationNumber')?.value);
+  //   formData.append('modelName', this.carForm.get('modelName')?.value);
+  //   formData.append('brandName', this.carForm.get('brandName')?.value);
+  //   formData.append('year', this.carForm.get('year')?.value);
+  //   formData.append('categoryName', this.carForm.get('categoryName')?.value);
+  //   formData.append('unitsAvailable', this.carForm.get('unitsAvailable')?.value);
+  //   formData.append('availabilityStatus', this.carForm.get('availabilityStatus')?.value);
+    
+  //   if (this.selectedFile) {
+  //     formData.append('imageUrl', this.selectedFile, this.selectedFile.name);
+  //   }
+  
+  //   // Call car service to add car
+  //   this.carService.createCar(formData).subscribe(
+  //     response => {
+  //       console.log("Car added successfully", response);
+  //       this.router.navigate(['/cars']);  // Adjust navigation as needed
+  //       alert('Car added successfully!');
+  //     },
+  //     error => {
+  //       console.log("Error adding car", error); // Log the error
+  //       alert('Error adding car: ' + error.message);
+  //     }
+  //   );
+  // }
+
+
   onSubmit(): void {
     if (this.carForm.invalid) {
-      console.log("Form is invalid"); // This helps verify if the form is invalid
-      return; // Stop if form is invalid
+      alert("Please fill out all required fields.");
+      console.error("Form is invalid:", this.carForm.value);
+      return; // Stop if the form is invalid
     }
   
-    console.log("Form submitted:", this.carForm.value); // Log form values to see if they're correct
+    if (!this.selectedFile) {
+      alert("Please upload an image.");
+      console.error("No file selected.");
+      return; // Stop if no file is selected
+    }
   
-    // Prepare FormData (or Car object) to be sent
+    console.log("Form submitted with values:", this.carForm.value);
+  
+    // Create a FormData object to hold form values and the file
     const formData = new FormData();
+  
+    // Append form fields to FormData
     formData.append('registrationNumber', this.carForm.get('registrationNumber')?.value);
-    formData.append('modelName', this.carForm.get('modelName')?.value);
-    formData.append('brandName', this.carForm.get('brandName')?.value);
+    formData.append('modelId', this.carForm.get('modelId')?.value);
+    formData.append('brandId', this.carForm.get('brandId')?.value);
     formData.append('year', this.carForm.get('year')?.value);
-    formData.append('categoryName', this.carForm.get('categoryName')?.value);
+    formData.append('id', this.carForm.get('id')?.value);
     formData.append('unitsAvailable', this.carForm.get('unitsAvailable')?.value);
     formData.append('availabilityStatus', this.carForm.get('availabilityStatus')?.value);
-    
-    if (this.selectedFile) {
-      formData.append('imageUrl', this.selectedFile, this.selectedFile.name);
-    }
   
-    // Call car service to add car
+    // Append the selected image file to FormData
+    formData.append('imageFile', this.selectedFile, this.selectedFile.name);
+  
+    // Submit the data to the backend
     this.carService.createCar(formData).subscribe(
       response => {
-        console.log("Car added successfully", response);
-        this.router.navigate(['/cars']);  // Adjust navigation as needed
-        alert('Car added successfully!');
+        console.log("Car added successfully:", response);
+        alert("Car added successfully!");
+        this.router.navigate(['/cars']); // Navigate to the cars list or desired page
       },
       error => {
-        console.log("Error adding car", error); // Log the error
-        alert('Error adding car: ' + error.message);
+        console.error("Error adding car:", error);
+        alert("Error adding car. Please try again.");
       }
     );
   }
+  
   
 
 

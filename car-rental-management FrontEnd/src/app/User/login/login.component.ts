@@ -16,6 +16,7 @@ export class LoginComponent {
   user = { username: '', password: '' };
   errorMessage = '';
 
+
   // Register and login data
   isRegisterMode = false;
   registerData = {
@@ -46,8 +47,6 @@ export class LoginComponent {
   onRegister(): void {
     console.log('Register Data:', this.registerData);
 
-    // Save register data to localStorage
-    localStorage.setItem('user', JSON.stringify(this.registerData));
 
     // You can also clear the form after registration
     this.registerData = {

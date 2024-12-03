@@ -43,7 +43,7 @@ namespace CAR_RENTAL_MS_III.Controllers
 
         //POST: api/Car
        [HttpPost("AddCar")]
-        public async Task<IActionResult> AddCar([FromForm] CarRequestDTO carRequest)
+        public async Task<IActionResult> AddCar(CarRequestDTO carRequest)
         {
             try
             {
@@ -59,24 +59,24 @@ namespace CAR_RENTAL_MS_III.Controllers
       
 
 
-        [HttpPost("UploadImage")]
-        public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
-        {
-            if (file == null || file.Length == 0)
-            {
-                return BadRequest("No image file provided.");
-            }
+        //[HttpPost("UploadImage")]
+        //public async Task<IActionResult> UploadImage([FromForm] IFormFile file)
+        //{
+        //    if (file == null || file.Length == 0)
+        //    {
+        //        return BadRequest("No image file provided.");
+        //    }
 
-            var fileName = Path.GetFileName(file.FileName);
-            var filePath = Path.Combine("wwwroot/images", fileName); // Adjust the path as needed
+        //    var fileName = Path.GetFileName(file.FileName);
+        //    var filePath = Path.Combine("wwwroot/images", fileName); // Adjust the path as needed
 
-            using (var stream = new FileStream(filePath, FileMode.Create))
-            {
-                await file.CopyToAsync(stream);
-            }
+        //    using (var stream = new FileStream(filePath, FileMode.Create))
+        //    {
+        //        await file.CopyToAsync(stream);
+        //    }
 
-            return Ok(new { imagePath = filePath }); // Return the image path to the frontend
-        }
+        //    return Ok(new { imagePath = filePath }); // Return the image path to the frontend
+        //}
 
 
 
